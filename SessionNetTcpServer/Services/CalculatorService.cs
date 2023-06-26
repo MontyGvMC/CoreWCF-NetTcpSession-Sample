@@ -9,51 +9,59 @@ namespace SessionNetTcpServer.Services
     [ServiceContract]
     public interface ICalculatorService
     {
+
         [OperationContract]
         double Add(double n1, double n2);
+        
         [OperationContract]
         double Subtract(double n1, double n2);
+        
         [OperationContract]
         double Multiply(double n1, double n2);
+        
         [OperationContract]
         double Divide(double n1, double n2);
+
     }
 
-    public class CalculatorService : ICalculatorService
+    public partial class CalculatorService : ICalculatorService
     {
 
-        //protected readonly ILogger<CalculatorService> Logger;
+        protected readonly string GUID = Guid.NewGuid().ToString();
+        protected readonly ILogger Logger;
 
-        //public CalculatorService(ILogger<CalculatorService> logger)
-        //{
-        //    Logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        //}
+        public CalculatorService(ILoggerFactory loggerFactory)
+        {
+            if (loggerFactory == null) throw new ArgumentNullException(nameof(loggerFactory));
+
+            Logger = loggerFactory.CreateLogger(GetType().FullName + "[" + GUID + "]");
+        }
 
         public double Add(double n1, double n2)
         {
             double res = n1 + n2;
-            //Logger.LogInformation("add: {N1} + {N2} = {Res}", n1, n2, res);
+            Logger.LogInformation("add: {N1} + {N2} = {Res}", n1, n2, res);
             return res;
         }
 
         public double Subtract(double n1, double n2)
         {
             double res = n1 - n2;
-            //Logger.LogInformation("sub: {N1} - {N2} = {Res}", n1, n2, res);
+            Logger.LogInformation("sub: {N1} - {N2} = {Res}", n1, n2, res);
             return res;
         }
 
         public double Multiply(double n1, double n2)
         {
             double res = n1 * n2;
-            //Logger.LogInformation("mul: {N1} * {N2} = {Res}", n1, n2, res);
+            Logger.LogInformation("mul: {N1} * {N2} = {Res}", n1, n2, res);
             return res;
         }
 
         public double Divide(double n1, double n2)
         {
             double res = n1 / n2;
-            //Logger.LogInformation("div: {N1} / {N2} = {Res}", n1, n2, res);
+            Logger.LogInformation("div: {N1} / {N2} = {Res}", n1, n2, res);
             return res;
 
         }

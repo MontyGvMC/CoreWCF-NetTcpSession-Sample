@@ -23,8 +23,9 @@ namespace SessionNetTcpServer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddScoped<ICalculatorService, CalculatorService>();
-            //services.AddScoped<ISpecialService, SpecialService>();
+
+            services.AddScoped<CalculatorService>();
+            services.AddScoped<SpecialService>();
 
             services
                 .AddServiceModelServices()  //Enable CoreWCF Services

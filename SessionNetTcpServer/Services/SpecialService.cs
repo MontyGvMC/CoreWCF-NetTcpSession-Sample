@@ -24,6 +24,7 @@ namespace SessionNetTcpServer.Services
         /// </summary>
         [DataMember]
         public int Value { get; set; }
+
     }
 
     /// <summary>
@@ -69,34 +70,25 @@ namespace SessionNetTcpServer.Services
         /// <summary>
         /// The session GUID assigned to this instance.
         /// </summary>
-        protected readonly string GUID;
+        protected readonly string GUID = Guid.NewGuid().ToString();
 
         /// <summary>
         /// The current value of the session.
         /// </summary>
         protected int Value { get; set; }
 
-        ///// <summary>
-        ///// The logger to be used for logging.
-        ///// </summary>
-        //protected readonly ILogger Logger;
-
-        ///// <summary>
-        ///// Constructs a new instance.
-        ///// </summary>
-        ///// <param name="loggerFactory">The logger factory used for creating the logger.</param>
-        //public SpecialService(ILoggerFactory loggerFactory)
-        //{
-        //    GUID = Guid.NewGuid().ToString();
-        //    Logger = loggerFactory.CreateLogger($"{GetType().FullName}[{GUID}]");
-        //}
+        /// <summary>
+        /// The logger to be used for logging.
+        /// </summary>
+        protected readonly ILogger Logger;
 
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
-        public SpecialService()
+        public SpecialService(ILoggerFactory loggerFactory)
         {
-            GUID = Guid.NewGuid().ToString();
+            if (loggerFactory == null) throw new ArgumentNullException(nameof(loggerFactory));
+            Logger = loggerFactory.CreateLogger(GetType().FullName + "[" + GUID + "]");
         }
 
         /// <inheritdoc/>
@@ -104,7 +96,7 @@ namespace SessionNetTcpServer.Services
         {
             Value++;
 
-            //Logger.LogInformation("increment to {Value}", Value);
+            Logger.LogInformation("increment to {Value}", Value);
 
             return new SpecialData
             {
@@ -118,7 +110,7 @@ namespace SessionNetTcpServer.Services
         {
             Value--;
 
-            //Logger.LogInformation("decrement to {Value}", Value);
+            Logger.LogInformation("decrement to {Value}", Value);
 
             return new SpecialData
             {
