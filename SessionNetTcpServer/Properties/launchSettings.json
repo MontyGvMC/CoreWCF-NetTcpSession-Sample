@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "SessionNetTcpServer": {
+        "commandName": "Project",
+        "launchBrowser": true,
+        "launchUrl": "Calculator/basicHttp",
+        "applicationUrl": "http://localhost:5000",
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development"
+        }
+    }
+  }
+}
