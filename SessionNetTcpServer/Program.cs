@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System.Net;
+using CoreWCF.Configuration;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
 namespace SessionNetTcpServer
@@ -16,7 +18,12 @@ namespace SessionNetTcpServer
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    //webBuilder.UseNetTcp(8808);
+                    //webBuilder.UseKestrel(options =>
+                    //{
+                    //    options.Listen(IPAddress.Any, 5000, listenOptions => { });
+                    //    options.Listen(IPAddress.Any, 5001, listenOptions => { listenOptions.UseHttps(); });
+                    //});
+                    //webBuilder.UseNetTcp(IPAddress.Any, 5002);
                     webBuilder.UseStartup<Startup>();
                 });
 

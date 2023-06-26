@@ -24,8 +24,9 @@ namespace SessionNetTcpServer
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddScoped<CalculatorService>();
+            services.AddTransient<CalculatorService>();
             services.AddScoped<SpecialService>();
+            services.AddSingleton<CallbackService>();
 
             services
                 .AddServiceModelServices()  //Enable CoreWCF Services
@@ -62,16 +63,20 @@ namespace SessionNetTcpServer
             app.UseServiceModel(builder =>
             {
 
-                // Add the calculator service with BasicHttpBinding endpoint
+                // add the calculator service with BasicHttpBinding
                 builder
                     .AddService<CalculatorService>(serviceOptions => { })
                     .AddServiceEndpoint<CalculatorService, ICalculatorService>(new BasicHttpBinding(), "/Calculator/basicHttp");
 
-                // Add the special service with BasicHttpBinding endpoint
-                builder
-                    .AddService<SpecialService>(serviceOptions => { })
-                    //.AddServiceEndpoint<SpecialService, ISpecialService>(new NetTcpBinding(SecurityMode.None), "/Special/netTcp")
-                    .AddServiceEndpoint<SpecialService, ISpecialService>(new BasicHttpBinding(), "Special/basicHttp");
+                //// add the special service with NetTcpBinding
+                //builder
+                //    .AddService<SpecialService>(serviceOptions => { })
+                //    .AddServiceEndpoint<SpecialService, ISpecialService>(new NetTcpBinding(SecurityMode.None), "/Special/netTcp");
+
+                //// add the callback service with NetTcpBinding
+                //builder
+                //    .AddService<CallbackService>(serviceOptions => { })
+                //    .AddServiceEndpoint<CallbackService, ICallbackService>(new NetTcpBinding(SecurityMode.None), "/Callback/netTcp");
 
 
                 // Configure WSDL to be available
