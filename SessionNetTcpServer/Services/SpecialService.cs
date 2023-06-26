@@ -30,11 +30,9 @@ namespace SessionNetTcpServer.Services
     /// <summary>
     /// Contract of the service requiring a session.
     /// </summary>
-    [ServiceContract
-        (
-            //SessionMode = SessionMode.Required // /TODO: enable session mode
-        )
-    ]
+    [ServiceContract(
+        SessionMode = SessionMode.Required
+    )]
     public interface ISpecialService
     {
 
