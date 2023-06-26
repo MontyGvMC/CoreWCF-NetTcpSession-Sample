@@ -4,6 +4,9 @@ This sample demonstrates how to host a sessionfull WCF service with an NetTcp en
 
 The sample intentionally doesn't use minimal API.
 
+Link 1: [CoreWCF issue](https://github.com/CoreWCF/CoreWCF/issues/1124)
+Link 2: [StackOverflow question](https://stackoverflow.com/questions/76554286/corewcf-service-holding-a-session-over-nettcp)
+
 ## project structure and startup
 
 The project SessionNetTcpServer holds the server running the services.
